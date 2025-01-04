@@ -1,4 +1,4 @@
-package org.example.threading;
+package org.learning.threading;
 
 public class SimpleCounterUsingSynchronisation {
 
