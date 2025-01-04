@@ -1,13 +1,10 @@
 package org.example.threading;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class UsingExecutors {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newCachedThreadPool();
 
         Runnable task = () -> {
@@ -20,5 +17,6 @@ public class UsingExecutors {
             executor.submit(task);
         }
         executor.awaitTermination(2, TimeUnit.SECONDS);
+        executor.shutdown();
     }
 }
