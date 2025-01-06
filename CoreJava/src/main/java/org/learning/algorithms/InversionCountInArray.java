@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class InversionCountInArray {
 
-    static int getInversionCount(int[] arr, int mod){
+    static int getInversionCount(int[] arr,int start,int end, int mod){
 
         int count = 0;
         for(int i=0;i<arr.length-1;i++){
@@ -13,6 +13,11 @@ public class InversionCountInArray {
                     count = (count+1)%mod;
                 }
             }
+        }
+
+        while(start<end){
+            if(arr[end]<arr[start]) count = (count+1)%mod;
+            end--;
         }
 
         return count;
@@ -24,7 +29,7 @@ public class InversionCountInArray {
         Arrays.stream(arr).forEach(n -> System.out.print(n+" "));
         System.out.println();
 
-        int ans = getInversionCount(arr,mod);
+        int ans = getInversionCount(arr,0,arr.length-1,mod);
         System.out.println("Inversion Count is "+ans);
     }
 }
