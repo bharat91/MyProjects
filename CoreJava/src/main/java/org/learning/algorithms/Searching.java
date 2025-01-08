@@ -25,7 +25,7 @@ public class Searching {
 
         int mid = -1;
 
-        while(left<right){
+        while(left<=right){
             mid = (left+right)/2;
             if(arr[mid] > elementToFind){
                 right = mid-1;
@@ -36,7 +36,7 @@ public class Searching {
             }
         }
 
-        return mid;
+        return -1;
     }
     public static void main(String[] args) {
         int[] arr = new int[]{5,7,2,4,9,10,1,13};
