@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class OpenSourceAiService {
 
-    @Value("${spring.ai.llama.api-key}")
+    @Value("${spring.ai.openai.api-key}")
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();

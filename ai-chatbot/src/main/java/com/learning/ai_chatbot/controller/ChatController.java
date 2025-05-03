@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/chat")
+@RequestMapping("/api")
 public class ChatController {
 
     @Autowired
     public OpenSourceAiService openSourceAiService;
 
-    @PostMapping("")
+    @PostMapping("/chat")
     public ResponseEntity<String> chat(@RequestBody ChatRequest chatRequest) {
+        String prompt = chatRequest.getMessages().get(chatRequest.getMessages().size()-1).get("content");
         String response = openSourceAiService.sendPrompt(chatRequest.getMessages());
         return ResponseEntity.ok(response);
     }

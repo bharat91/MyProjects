@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>ai-chatbot</name>
-	<description>Demo project for OpenAI API</description>
+	<description>Primo - A very basic AI chatbot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -115,6 +115,56 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<!-- Build React -->
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals><goal>install-node-and-npm</goal></goals>
+						<configuration>
+							<nodeVersion>v18.12.1</nodeVersion>
+							<npmVersion>8.19.2</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals><goal>npm</goal></goals>
+						<configuration><arguments>install</arguments></configuration>
+					</execution>
+					<execution>
+						<id>npm build</id>
+						<goals><goal>npm</goal></goals>
+						<configuration><arguments>run build</arguments></configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<workingDirectory>src/main/frontend</workingDirectory>
+				</configuration>
+			</plugin>
+
+			<!-- Copy React build to static folder -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>package</phase>
+						<goals><goal>copy-resources</goal></goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/frontend/build</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
